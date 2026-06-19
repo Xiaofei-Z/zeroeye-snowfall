@@ -78,7 +78,7 @@ RECOMMENDED_ALERT_RULES: List[Dict[str, Any]] = [
     },
     {
         "name": "HighMemoryUsage",
-        "expr": "process_resident_memory_bytes / process_resident_memory_bytes > 0.9",
+        "expr": "process_resident_memory_bytes / machine_memory_bytes > 0.9",
         "duration": "10m",
         "severity": "warning",
         "summary": "High memory usage on {{$labels.instance}}",
@@ -449,3 +449,15 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+def validate_alert_expressions(alerts):
+    """Detect self-dividing alert expressions (always eval to 1, a bug)."""
+    import re
+    issues = []
+    for alert in alerts:
+        expr = alert.get("expr", "")
+        m = re.match(r"^\s*(\w+)\s*/\s*\1\b", expr)
+        if m:
+            issues.append((alert.get("name", "<unnamed>"), f"self-dividing: {expr!r} always 1"))
+    return issues
