@@ -1,0 +1,24 @@
+{
+  "generated_at": "2026-06-19T14:10:12.677246+00:00",
+  "commit": "91b10782",
+  "diagnostic_logd": null,
+  "diagnostic_logd_error": "078fd0e0501eaf0c8c68",
+  "message_blocker": "You need to fix your environment so encryptly runs before building.",
+  "chunked": false,
+  "chunk_size_bytes": null,
+  "password": null,
+  "decrypt_command": null,
+  "total_modules": 1,
+  "passed": 0,
+  "failed": 1,
+  "modules": [
+    {
+      "name": "encryptly-preflight",
+      "status": "FAIL",
+      "elapsed_seconds": 10.967,
+      "artifact": null,
+      "output": "You need to fix your environment so encryptly runs before building. encryptly preflight completed without creating a .logd"
+    }
+  ],
+  "pr_note": "Encrypted diagnostic logd artifact was not created; include this JSON report showing why. The encrypted .logd is the required diagnostic content for PR review; this JSON file is metadata. Maintainers may ask you to remove these diagnostic artifacts before merging."
+}
